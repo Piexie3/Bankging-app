@@ -14,15 +14,11 @@ import org.springframework.stereotype.Service;
 public class EmailService implements IEmailService{
     private final JavaMailSender javaMailSender;
 
-    @Value("${spring.mail.username}")
-    private final String senderEmail;
-
 
     @Override
     public void sendEmailAlert(EmailDetails emailDetails) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom(senderEmail);
             message.setTo(emailDetails.getRecipient());
             message.setText(emailDetails.getMessageBody());
             message.setSubject(emailDetails.getSubject());
