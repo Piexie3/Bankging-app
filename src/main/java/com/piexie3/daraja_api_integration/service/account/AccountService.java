@@ -71,4 +71,41 @@ public class AccountService implements IAccountService{
                         .build())
                 .build();
     }
+
+    @Override
+    public BankResponse debitAccount(CreditDebitRequest request) {
+        // account is there
+        // balance is not less tha what to withdraw
+        boolean existsByAccountNumber = userRepository.existsByAccountNumber(request.getAccountNumber());
+        if (!existsByAccountNumber){
+            return BankResponse.builder()
+                    .code(AccountUtils.ACCOUNT_NOT_EXISTS_CODE)
+                    .message(AccountUtils.ACCOUNT_NOT_EXISTS_MESSAGE)
+                    .data(null)
+                    .build();
+        }
+        User user = userRepository.findByAccountNumber(request.getAccountNumber());
+        int availableBalance = user.getAccountBalance().intValue();
+        int debitAmount = request.getAmount().intValue();
+        if (availableBalance<debitAmount){
+            return BankResponse.builder()
+                    .code(AccountUtils.INSUFFICIENT_FUND_CODE)
+                    .message(AccountUtils.INSUFFICIENT_FUND_MESSAGE)
+                    .data(null)
+                    .build();
+        }
+        else {
+            user.setAccountBalance(user.getAccountBalance().subtract(request.getAmount()));
+            userRepository.save(user);
+            return BankResponse.builder()
+                    .code(AccountUtils.ACCOUNT_DEBITED_CODE)
+                    .message(AccountUtils.ACCOUNT_DEBITED_MESSAGE)
+                    .data(AccountInfo.builder()
+                            .accountNumber(request.getAccountNumber())
+                            .accountBalance(user.getAccountBalance())
+                            .accountName(user.getFirstName()+" "+user.getLastName()+" " +user.getSurname())
+                            .build())
+                    .build();
+        }
+    }
 }

@@ -10,10 +10,16 @@ public class AccountUtils {
     public static final String ACCOUNT_CREATION_CODE = "002";
     public static final String ACCOUNT_NOT_EXISTS_CODE = "003";
     public static final String ACCOUNT_NOT_EXISTS_MESSAGE = "User with the provided account number does not exists";
-    public static final String ACCOUNT_FOUND_CODE = "003";
+    public static final String ACCOUNT_FOUND_CODE = "004";
     public static final String ACCOUNT_FOUND_MESSAGE = "User account found";
-    public static final String ACCOUNT_CREDITED_CODE = "004";
+    public static final String ACCOUNT_CREDITED_CODE = "005";
     public static final String ACCOUNT_CREDITED_MESSAGE = "User account credited successfully";
+    public static final String ACCOUNT_DEBITED_CODE = "006";
+    public static final String ACCOUNT_DEBITED_MESSAGE = "User account debited successfully";
+    public static final String INSUFFICIENT_FUND_CODE = "007";
+    public static final String INSUFFICIENT_FUND_MESSAGE = "Insufficient balance";
+
+
     public static  String generateAccountNumber(){
         Year currentYear = Year.now();
         int minSixDig = 100000;

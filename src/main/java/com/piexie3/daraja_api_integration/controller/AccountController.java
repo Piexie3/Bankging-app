@@ -23,9 +23,14 @@ public class AccountController {
         return accountService.nameEnquiry(request);
     }
 
-    @PostMapping("/credit_account")
+    @PostMapping("/deposit")
     public BankResponse creditAccount(@RequestBody CreditDebitRequest request){
         return accountService.creditAccount(request);
+    }
+
+    @PostMapping("/withdraw")
+    public BankResponse debitAccount(@RequestBody CreditDebitRequest request){
+        return accountService.debitAccount(request);
     }
 
 }
