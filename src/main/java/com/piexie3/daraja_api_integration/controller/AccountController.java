@@ -5,12 +5,14 @@ import com.piexie3.daraja_api_integration.dto.CreditDebitRequest;
 import com.piexie3.daraja_api_integration.dto.EnquiryRequest;
 import com.piexie3.daraja_api_integration.dto.TransferRequest;
 import com.piexie3.daraja_api_integration.service.account.AccountService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("${api.prefix}/account")
+@Tag(name = "User Account management Apis")
 public class AccountController {
     private final AccountService accountService;
 
