@@ -126,7 +126,9 @@ public class AccountService implements IAccountService{
         }
         User sourceUser = userRepository.findByAccountNumber(request.getSourceAccountNumber());
         User destinationUser = userRepository.findByAccountNumber(request.getDestinationAccountNumber());
-        if (request.getAmount().compareTo(sourceUser.getAccountBalance())< 0){
+        int availableBalance = sourceUser.getAccountBalance().intValue();
+        int debitAmount = request.getAmount().intValue();
+        if (availableBalance<debitAmount){
             return BankResponse.builder()
                     .code(AccountUtils.INSUFFICIENT_FUND_CODE)
                     .message(AccountUtils.INSUFFICIENT_FUND_MESSAGE)
