@@ -1,8 +1,11 @@
 spring:
+  config:
+    import: "classpath:keys.properties"
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/banking_app
-    username: root
-    password: root
+    url: ${db.url}
+    username: ${db.username}
+    password: ${db.password}
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -23,8 +26,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username:  wanjohilewi7@gmail.com
-    password: qwcn fahs zyah msfy
+    username: ${mail.username}
+    password: ${mail.password}
     properties:
       mail:
         smtp:

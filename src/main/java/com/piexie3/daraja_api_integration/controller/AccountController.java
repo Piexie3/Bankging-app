@@ -3,6 +3,7 @@ package com.piexie3.daraja_api_integration.controller;
 import com.piexie3.daraja_api_integration.dto.BankResponse;
 import com.piexie3.daraja_api_integration.dto.CreditDebitRequest;
 import com.piexie3.daraja_api_integration.dto.EnquiryRequest;
+import com.piexie3.daraja_api_integration.dto.TransferRequest;
 import com.piexie3.daraja_api_integration.service.account.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,11 @@ public class AccountController {
     @PostMapping("/withdraw")
     public BankResponse debitAccount(@RequestBody CreditDebitRequest request){
         return accountService.debitAccount(request);
+    }
+
+    @PostMapping("/transfer")
+    public BankResponse transferMoney(@RequestBody TransferRequest request){
+        return accountService.transfer(request);
     }
 
 }
