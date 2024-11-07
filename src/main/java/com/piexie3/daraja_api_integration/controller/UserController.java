@@ -2,7 +2,7 @@ package com.piexie3.daraja_api_integration.controller;
 
 import com.piexie3.daraja_api_integration.dto.BankResponse;
 import com.piexie3.daraja_api_integration.dto.UserRequest;
-import com.piexie3.daraja_api_integration.service.auth.UserService;
+import com.piexie3.daraja_api_integration.service.auth.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("${api.prefix}/auth")
 @Tag(name = "User Authentication Apis")
 public class UserController {
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Operation(
             summary = "creating new user account",

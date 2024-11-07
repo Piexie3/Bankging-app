@@ -4,7 +4,7 @@ import com.piexie3.daraja_api_integration.dto.BankResponse;
 import com.piexie3.daraja_api_integration.dto.CreditDebitRequest;
 import com.piexie3.daraja_api_integration.dto.EnquiryRequest;
 import com.piexie3.daraja_api_integration.dto.TransferRequest;
-import com.piexie3.daraja_api_integration.service.account.AccountService;
+import com.piexie3.daraja_api_integration.service.account.AccountServiceImpl;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("${api.prefix}/account")
 @Tag(name = "User Account management Apis")
 public class AccountController {
-    private final AccountService accountService;
+    private final AccountServiceImpl accountService;
 
     @GetMapping("/account_balance")
     public BankResponse balanceEnquiry(@RequestBody EnquiryRequest request){
