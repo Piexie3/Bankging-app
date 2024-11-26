@@ -23,6 +23,26 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${google.clientId}
+            client-secret: ${google.clientSecret}
+            scope:
+              - openid
+              - profile
+              - email
+            redirect-uri: ${google.redirectUrl}
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            jwk-set-uri: https://www.googleapis.com/oauth2/v3/certs
+            user-name-attribute: sub
+
   mail:
     host: smtp.gmail.com
     port: 587
@@ -34,6 +54,7 @@ spring:
           auth: true
           starttls:
             enable: true
+
 
 server:
   port: 9090

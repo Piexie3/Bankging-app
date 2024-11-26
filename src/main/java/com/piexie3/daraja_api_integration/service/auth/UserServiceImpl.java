@@ -8,16 +8,22 @@ import com.piexie3.daraja_api_integration.models.User;
 import com.piexie3.daraja_api_integration.repository.auth.UserRepository;
 import com.piexie3.daraja_api_integration.service.email.EmailServiceImpl;
 import com.piexie3.daraja_api_integration.utils.AccountUtils;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final EmailServiceImpl emailService;
+    private final PasswordEncoder passwordEncoder;
+
 
     @Override
     public BankResponse createAccount(UserRequest request) {
@@ -35,6 +41,7 @@ public class UserServiceImpl implements UserService {
                     .accountNumber(AccountUtils.generateAccountNumber())
                     .accountBalance(BigDecimal.ZERO)
                     .email(request.getEmail())
+                    .password(passwordEncoder.encode(request.getPassword()))
                     .phoneNumber(request.getPhoneNumber())
                     .altPhoneNumber(request.getAltPhoneNumber())
                     .status("PENDING")
@@ -80,4 +87,6 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+
+
 }
